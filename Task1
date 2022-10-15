@@ -1,0 +1,73 @@
+import java.util.*;
+class Vector {
+  private double dx, dy, dz;
+
+  Vector(double dx, double dy, double dz) {
+    this.dx = dx;
+    this.dy = dy;
+    this.dz = dz;
+  }
+
+  public double Length() {
+    return Math.sqrt(dx * dx + dy * dy + dz * dz);
+  }
+
+  public double Scalar(Vector a) {
+    return a.dx * dx + a.dy * dy + a.dz * dz;
+  }
+  
+  public Vector GetVect(Vector a) {
+      double x = (a.dy * dz - a.dz * dy);
+      double y = (a.dz * dx - a.dx * dz);
+      double z = (a.dx * dy - a.dy * dx);
+      Vector c = new Vector(x, y, z);
+      return c;
+  }
+  
+  public double Angle(Vector a) {
+    double x = this.Scalar(a);
+    return Math.acos(x / (this.Length() * a.Length()));
+  }
+  
+  public Vector GetVectSum(Vector a) {
+      double X = (a.dx + dx);
+      double Y = (a.dy + dy);
+      double Z = (a.dz + dz);
+      Vector c = new Vector(X, Y, Z);
+      return c;
+  }
+  
+  public Vector GetVectMinus(Vector a) {
+      double X = (a.dx - dx);
+      double Y = (a.dy - dy);
+      double Z = (a.dz - dz);
+      Vector c = new Vector(X, Y, Z);
+      return c;
+  }
+
+};
+
+
+public class Main {
+  public static void main(String[] args) {
+    Scanner scan = new Scanner(System.in);
+    double a1 = scan.nextInt();
+    double b1 = scan.nextInt();
+    double c1 = scan.nextInt();
+    Vector v1 = new Vector(a1, b1, c1);
+    
+    double a2 = scan.nextInt();
+    double b2 = scan.nextInt();
+    double c2 = scan.nextInt();
+    Vector v2 = new Vector(a2, b2, c2);
+    
+    System.out.println(v1.Length());
+    System.out.println(v2.Length());
+    System.out.println(v1.Scalar(v2));
+    System.out.println(v1.Angle(v2));
+    System.out.println(v1.GetVect(v2));
+    System.out.println(v1.GetVectSum(v2));
+    System.out.println(v1.GetVectMinus(v2));
+    scan.close();
+  }
+}
